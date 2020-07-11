@@ -1,0 +1,380 @@
+
+
+###########################################################################
+#                                                                         #
+#                              VARIABLES                                  #
+#                                                                         #
+###########################################################################
+
+set $mod Mod4
+
+set $emacs              /home/mark/.bin/emacs
+set $browser            brave
+set $browser-private    brave --incognito
+
+
+
+###########################################################################
+#                                                                         #
+#                               GENERAL                                   #
+#                                                                         #
+###########################################################################
+
+font pango:TerminessTTFNerdFontMono 12
+
+floating_modifier $mod
+
+
+
+###########################################################################
+#                                                                         #
+#                               WINDOWS                                   #
+#                                                                         #
+###########################################################################
+
+default_border pixel 1
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Change focus
+bindsym $mod+h              focus left
+bindsym $mod+j              focus down
+bindsym $mod+k              focus up
+bindsym $mod+l              focus right
+
+# Move focused window
+bindsym $mod+Shift+h        move left
+bindsym $mod+Shift+j        move down
+bindsym $mod+Shift+k        move up
+bindsym $mod+Shift+l        move right
+
+# splits horizontal/vertical
+bindsym $mod+z              split h
+bindsym $mod+v              split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f              fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s              layout stacking
+bindsym $mod+w              layout tabbed
+bindsym $mod+q              layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space   floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space         focus mode_toggle
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+Control+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+
+
+###########################################################################
+#                                                                         #
+#                             CONTAINERS                                  #
+#                                                                         #
+###########################################################################
+
+# Focus parent
+bindsym $mod+a          focus parent
+
+# Focus child 
+bindsym $mod+Shift+a    focus child
+
+
+
+
+###########################################################################
+#                                                                         #
+#                             WORKSPACES                                  #
+#                                                                         #
+###########################################################################
+
+# Define names for default workspaces for which we configure key
+# bindings later on.
+#set $ws1 "one"
+#set $ws2 "two"
+#set $ws3 "three"
+#set $ws4 "four"
+#set $ws5 "five"
+#set $ws6 "six"
+#set $ws7 "seven"
+#set $ws8 "eight"
+#set $ws9 "nine"
+#set $ws10 "ten"
+
+set $ws1   "1:Один"
+set $ws2   "2:Два"
+set $ws3   "3:Три"
+set $ws4   "4:Четыре"
+set $ws5   "5:Пять"
+set $ws6   "6:Шесть"
+set $ws7   "7:Семь"
+set $ws8   "8:Восемь"
+set $ws9   "9:Дебять"
+set $ws10  "10:Десять"
+
+#set $ws1 "1:term"
+#set $ws2 "2:main"
+#set $ws3 "3;web"
+#set $ws4 "4:code"
+#set $ws5 "5:hack"
+#set $ws6 "6:video"
+#set $ws7 "7:music"
+#set $ws8 "8:dl"
+#set $ws9 "9:VMs"
+#set $ws10 "10;misc"
+
+# Switch to workspace
+bindsym $mod+1      workspace $ws1
+bindsym $mod+2      workspace $ws2
+bindsym $mod+3      workspace $ws3
+bindsym $mod+4      workspace $ws4
+bindsym $mod+5      workspace $ws5
+bindsym $mod+6      workspace $ws6
+bindsym $mod+7      workspace $ws7
+bindsym $mod+8      workspace $ws8
+bindsym $mod+9      workspace $ws9
+bindsym $mod+0      workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1       move container to workspace $ws1
+bindsym $mod+Shift+2       move container to workspace $ws2
+bindsym $mod+Shift+3       move container to workspace $ws3
+bindsym $mod+Shift+4       move container to workspace $ws4
+bindsym $mod+Shift+5       move container to workspace $ws5
+bindsym $mod+Shift+6       move container to workspace $ws6
+bindsym $mod+Shift+7       move container to workspace $ws7
+bindsym $mod+Shift+8       move container to workspace $ws8
+bindsym $mod+Shift+9       move container to workspace $ws9
+bindsym $mod+Shift+0       move container to workspace $ws10
+
+# Navigate workspaces next / previous
+bindsym $mod+Ctrl+l        workspace next
+bindsym $mod+Ctrl+h        workspace prev
+bindsym $mod+Ctrl+Right    workspace next
+bindsym $mod+Ctrl+Left     workspace prev
+
+#toggle last active workspace
+# bindsym $mod+space workspace back_and_forth
+
+
+
+bindsym $mod+Shift+c    reload
+bindsym $mod+Shift+r    restart
+bindsym $mod+Shift+x    exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+
+
+###########################################################################
+#                                                                         #
+#                             STATUS BAR                                  #
+#                                                                         #
+###########################################################################
+
+bar {
+    status_command            i3status
+    strip_workspace_numbers   yes
+    mode                      hide
+    hidden_state              hide
+}
+
+
+
+###########################################################################
+#                                                                         #
+#                               COLORS                                    #
+#                                                                         #
+###########################################################################
+
+# colors                  border  bg      text    indcatr child_border
+client.focused            #d26939 #10151b #d3ebe9 #195464 #d26939
+client.focused_inactive   #245361 #10151b #d3ebe9 #195464 #4e5165
+client.unfocused          #10151b #10151b #245361 #195464 #4e5165
+#client.urgent            #344c8d #344c8d #ffffff #334c8d #334c8d
+#client.placeholder            #344c8d #344c8d #ffffff #334c8d #334c8d
+#client.background            #344c8d
+
+# toggle debug logging
+bindsym $mod+x debuglog toggle
+
+focus_follows_mouse no
+
+new_window pixel 
+new_float normal
+
+# gaps
+#smart_gaps on
+#smart_gaps inver
+#smart_borders on
+gaps inner 20
+gaps outer 0
+
+# Gap control keybindings
+# -----------------------
+
+# Make windows larger
+bindsym $mod+plus            gaps inner current minus 5
+bindsym $mod+Shift+plus      gaps inner current minus 20
+# Make windows smaller
+bindsym $mod+minus           gaps inner current plus 5
+bindsym $mod+Shift+minus     gaps inner current plus 20
+
+bindsym $mod+Control+plus    gaps inner current set 0
+
+
+
+###########################################################################
+#                                                                         #
+#                               STARTUP                                   #
+#                                                                         #
+###########################################################################
+
+exec --no-startup-id conky
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id pasystray
+exec --no-startup-id blueman-applet
+exec --no-startup-id nm-applet
+exec --no-startup-id redshift
+exec --no-startup-id /home/mark/.local/bin/i3-border-focus
+
+
+
+
+###########################################################################
+#                                                                         #
+#                               HOTKEYS                                   #
+#                                                                         #
+###########################################################################
+
+# Terminals
+bindsym $mod+Return           exec i3-sensible-terminal
+bindsym $mod+Shift+Return     exec st -n floatingTerminal
+
+# Scratchpad
+#bindsym $mod+Shift+minus      move to scratchpad 
+#bindsym $mod+minus            scratchpad show
+
+# Browser
+bindsym $mod+b                exec $browser
+bindsym $mod+Shift+b          exec $browser-private
+
+# File Manager
+bindsym $mod+r                exec i3-sensible-terminal -e 'ranger'
+
+# Various Utilities
+bindsym $mod+Shift+v          exec pavucontrol          # Mixer
+
+#bindsym $mod+Shift+e          exec $emacs               # Editor
+
+# Launchers
+bindsym $mod+Shift+s          exec rofi-surfraw
+bindsym $mod+d                exec dmenu_run 
+#bindsym $mod+d                exec rofi -show run
+bindsym $mod+Shift+d          exec rofi -show drun
+
+# Window Switching
+bindsym $mod+Tab              exec rofi -show window
+bindsym $mod+Control+Tab      exec rofi -show windowcd
+
+# Clipboard manager
+bindsym $mod+grave exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'
+
+# Lock Screen
+bindsym $mod+Shift+f          exec slock
+
+# Screenshot
+bindsym Print                 exec flameshot gui
+bindsym $mod+Print            exec flameshot full -p /home/mark/pics/screenshots
+bindsym $mod+Shift+Print      exec flameshot full -c
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  # Increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%  # Decrease sound volume
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec toggle-touchpad    # Toggle touchpad
+
+# NOTE: These are hacks to keep my sanity when VMWare clobbers my
+# modifier keys
+bindsym Shift+Escape    exec i3-sensible-terminal
+bindsym Shift+Delete    exec /home/mark/.scripts/setkeymap
+
+
+
+
+# Classes
+for_window [instance="floatingTerminal"] floating enable
+
+# Open specific applications in floating mode
+for_window [class="Pavucontrol"] floating enable border pixel 1
+
+
+
+###########################################################################
+#                                                                         #
+#                             SCRATCHPADS                                 #
+#                                                                         #
+###########################################################################
+
+bindsym $mod+n   move scratchpad
+bindsym $mod+slash   scratchpad show
+
+# Editor
+for_window       [instance="^scratch-editor"]   move scratchpad
+bindsym $mod+e   [instance="^scratch-editor"]   scratchpad show                  
+#exec --no-startup-id /home/mark/.scripts/scratch-editor 
+
+# Terminal
+for_window       [instance="scratch-term"]      move scratchpad
+bindsym $mod+t   [instance="^scratch-term"]     scratchpad show                  
+exec --no-startup-id i3-sensible-terminal -n "scratch-term"
+
+# Calculator
+for_window       [class="^Gnome-calculator$"]   move scratchpad
+bindsym $mod+c   [class="^Gnome-calculator"]    scratchpad show                  
+exec --no-startup-id gnome-calculator 
+
+
+ 
+###########################################################################
+#                                                                         #
+#                                 MARKS                                   #
+#                                                                         #
+###########################################################################
+   
+# Mark Window
+bindsym $mod+m exec            i3-input  -P 'Mark: ' -F 'mark %s'
+# Mark Window and Move to Scratchpad
+bindsym $mod+Shift+m exec      "i3-input  -P 'Mark: ' -F 'mark %s;move scratchpad'"
+# Focus mark
+bindsym $mod+apostrophe exec   i3-input  -P 'Goto: ' -F '[con_mark="%s"] focus'
+
+
+
+###########################################################################
+#                                                                         #
+#                               TESTING                                   #
+#                                                                         #
+###########################################################################
